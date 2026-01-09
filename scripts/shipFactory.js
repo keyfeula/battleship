@@ -7,7 +7,7 @@ export function shipFactory(length) {
             return this.hits;
         },
         isSunk() {
-            return hits >= length ? true : false;
+            return this.hits >= this.length;
         }
     }
 }

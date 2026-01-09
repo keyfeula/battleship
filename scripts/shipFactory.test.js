@@ -1,6 +1,6 @@
 import { shipFactory } from "./shipFactory";
 
-const testShip = shipFactory(4);
+const testShip = shipFactory(2);
 
 describe("shipFactory interface methods", () => {
 
@@ -8,7 +8,15 @@ describe("shipFactory interface methods", () => {
         expect(testShip.hit()).toBe(1);
     });
 
+    test("isSunk method is false if less hits on ship than its length", () => {
+        expect(testShip.isSunk()).toBe(false);
+    });
+
     test("hit method increments hit variable by 1 again", () => {
         expect(testShip.hit()).toBe(2);
+    });
+
+    test("isSunk method is true if more or as many hits on ship as its length", () => {
+        expect(testShip.isSunk()).toBe(true);
     });
 })
