@@ -1,4 +1,4 @@
-export function shipFactory(length) {
+export function createShip(length) {
     return {
         length,
         hits: 0,

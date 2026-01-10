@@ -1,8 +1,8 @@
-import { shipFactory } from "./shipFactory";
+import { createShip } from "./ship";
 
-const testShip = shipFactory(2);
+const testShip = createShip(2);
 
-describe("shipFactory interface methods", () => {
+describe("ship object interface methods", () => {
 
     test("hit method increments hit variable by 1", () => {
         expect(testShip.hit()).toBe(1);
