@@ -8,6 +8,7 @@ export function createGameboard() {
     const destroyer = createShip(3);
     const submarine = createShip(3);
     const patrolBoat = createShip(2);
+    const ships = [carrier, battleship, destroyer, submarine, patrolBoat];
 
     const gameboard = [];
 
@@ -22,15 +23,27 @@ export function createGameboard() {
     function initializeGameboard() {
         for (let i = 0; i < ROWS; i++) {
             gameboard[i] = [];
+
             for (let j = 0; j < COLUMNS; j++) {
                 gameboard[i][j] = null;
             }
         }
     }
+    
+    function receiveAttack(x, y) {
+        gameboard[0][0] = carrier;
+        if (gameboard[x, y]) {
+            return "Hits: " + gameboard[x][y].hit();
+        }
+        else {
+            return "Miss!";
+        }
+    }
 
     initializeGameboard();
-    printGameboard();
+
+    return {
+        receiveAttack
+    }
 
 }
-
-createGameboard();

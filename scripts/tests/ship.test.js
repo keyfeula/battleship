@@ -1,4 +1,4 @@
-import { createShip } from "./ship";
+import { createShip } from "../ship";
 
 const testShip = createShip(2);
 
@@ -19,4 +19,5 @@ describe("ship object interface methods", () => {
     test("isSunk method is true if more or as many hits on ship as its length", () => {
         expect(testShip.isSunk()).toBe(true);
     });
+
 })
