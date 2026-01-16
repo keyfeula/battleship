@@ -3,19 +3,16 @@ import { createShip } from "./ship.js";
 export function createGameboard() {
     const ROWS = 10;
     const COLUMNS = 10;
-
     const carrier = createShip(5);
     const battleship = createShip(4);
     const destroyer = createShip(3);
     const submarine = createShip(3);
     const patrolBoat = createShip(2);
     const ships = [carrier, battleship, destroyer, submarine, patrolBoat];
-
     const grid = initializeGrid();
 
-
     function initializeGrid() {
-        let array = [];
+        const array = [];
         for (let i = 0; i < ROWS; i++) {
             array[i] = [];
             for (let j = 0; j < COLUMNS; j++) {
@@ -26,8 +23,8 @@ export function createGameboard() {
     }
 
     function placeShip(x, y, ship) {
-        for (let i = y; i < ship.length; i++) {
-            grid[x][i] = ship;
+        for (let i = 0; i < ship.length; i++) {
+            grid[x][y + i] = ship;
         }
         return grid[x][y];
     }
@@ -47,19 +44,20 @@ export function createGameboard() {
         }
     }
 
-    function printGrid() {
-        for (let i = 0; i < ROWS; i++) {
-            for (let j = 0; j < COLUMNS; j++) {
-                console.log(grid[i][j]);
+    function allShipsSunk() {
+        for (ship of ships) {
+            if (!ship.isSunk()) {
+                return false;
             }
         }
+        return true;
     }
 
     return {
         ships,
         placeShip,
         receiveAttack,
-        printGrid
+        allShipsSunk,
     }
 
 }
