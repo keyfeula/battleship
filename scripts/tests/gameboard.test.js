@@ -5,11 +5,11 @@
         const ships = gameboard.ships;
 
         test("placeShip function places the ships on the correct coordinates", () => {
-            expect(gameboard.placeShip(0, 0, ships[0])).toBe(ships[0]);
+            expect(gameboard.placeShip(0, 0, ships[0], "vertical")).toBe(true);
         });
 
         test("placeShip function places the ships on the correct coordinates", () => {
-            expect(gameboard.placeShip(9, 8, ships[2])).toBe(ships[2]);
+            expect(gameboard.placeShip(2, 2, ships[2], "horizontal")).toBe(true);
         });
 
         test("receiveAttack method calls the ship.hit function", () => {

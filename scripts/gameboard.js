@@ -22,11 +22,28 @@ export function createGameboard() {
         return array;
     }
 
-    function placeShip(x, y, ship) {
+    function placeShip(x, y, ship, orientation) {
         for (let i = 0; i < ship.length; i++) {
-            grid[x][y + i] = ship;
+            if (orientation === "vertical") {
+                if (grid[x + i][y] !== null) {
+                    return false;
+                }
+            }
+            else {
+                if (grid[x][y + i] !== null) {
+                    return false;
+                }
+            }
         }
-        return grid[x][y];
+        for (let i = 0; i < ship.length; i++) {
+            if (orientation === "vertical") {
+                grid[x + i][y] = ship;
+            }
+            else {
+                grid[x][y + i] = ship;
+            }
+        }
+        return true;
     }
 
     function receiveAttack(x, y) {
@@ -45,7 +62,7 @@ export function createGameboard() {
     }
 
     function allShipsSunk() {
-        for (ship of ships) {
+        for (let ship of ships) {
             if (!ship.isSunk()) {
                 return false;
             }
