@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: system-ui, sans-serif;
+}
+
+body {
+    padding: min(1rem, 5%);
+}
+
+header {
+    padding-bottom: 1rem;
+}
+
+h2 {
+    margin-bottom: 1rem;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.playerOne, .playerTwo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid {
+    max-width: 50rem;
+    display: grid;
+    grid-template-rows: repeat(10, 1fr);
+    grid-template-columns: repeat(10, 1fr);
+    border: 1px solid black;
+}
+
+.square {
+    padding: 1rem;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
