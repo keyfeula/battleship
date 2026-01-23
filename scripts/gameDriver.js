@@ -1,27 +1,29 @@
 import { createPlayer } from "./player.js";
+import { renderGrids } from "./renderGameboard.js";
 
-const playerOne = createPlayer("human");
-const playerTwo = createPlayer("computer");
+const p1 = createPlayer("human");
+const p2 = createPlayer("computer");
+let turnPlayer = p1;
+const mainContainer = document.querySelector("main");
 
-const p1GridContainer = document.querySelector(".playerOne .grid");
-const p2GridContainer = document.querySelector(".playerTwo .grid");
+renderGrids(p1, p2);
 
-function createGrid() {
-    for (let i = 0; i < 10; i++) {
-        for (let j = 0; j < 10; j++) {
-            const square = document.createElement("div");
-            const oppsSquare = document.createElement("div");
-            square.classList.add("square");
-            oppsSquare.classList.add("square");
-            square.id = `${i}-${j}`;
-            oppsSquare.id = `${i}-${j}`;
-            square.textContent = square.id;
-            oppsSquare.textContent = oppsSquare.id;
-            p1GridContainer.append(square);
-            p2GridContainer.append(oppsSquare);
-        }
+mainContainer.addEventListener("click", (event) => {
+    const clickedElement = event.target;
+    if (!clickedElement.classList.contains("cell")) {
+        return;
     }
-}
 
-createGrid();
-
+    const coordinates = clickedElement.id.split("-");
+    const attackResponse = turnPlayer.gameboard.receiveAttack(coordinates[0], coordinates[1]);
+    switch(attackResponse) {
+        case -1:
+            break;
+        case 0:
+            clickedElement.textContent = "O";
+            break;
+        case 1:
+            clickedElement.classList.add("hit");
+            break;
+    }
+});

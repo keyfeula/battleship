@@ -25,16 +25,23 @@ export function createGameboard() {
     function placeShip(x, y, ship, orientation) {
         for (let i = 0; i < ship.length; i++) {
             if (orientation === "vertical") {
-                if (grid[x + i][y] !== null) {
+                if (x + i > 9) {
+                    return false;
+                }
+                else if (grid[x + i][y] !== null) {
                     return false;
                 }
             }
             else {
-                if (grid[x][y + i] !== null) {
+                if (y + i > 9) {
+                    return false;
+                }
+                else if (grid[x][y + i] !== null) {
                     return false;
                 }
             }
         }
+
         for (let i = 0; i < ship.length; i++) {
             if (orientation === "vertical") {
                 grid[x + i][y] = ship;
@@ -46,11 +53,31 @@ export function createGameboard() {
         return true;
     }
 
+    function getShipAt(x, y) {
+        return grid[x][y];
+    }
+
+    function randomizeShips() {
+        for (let ship of ships) {
+            let randomX = Math.floor(Math.random() * 9);
+            let randomY = Math.floor(Math.random() * 9);
+
+            let orientation = Math.random() > 0.5 ? "horizontal" : "vertical";
+            let shipPlaced = placeShip(randomX, randomY, ship, orientation);
+            while (!shipPlaced) {
+                orientation = Math.random() > 0.5 ? "horizontal" : "vertical";
+                randomX = Math.floor(Math.random() * 9);
+                randomY = Math.floor(Math.random() * 9);
+                shipPlaced = placeShip(randomX, randomY, ship, orientation);
+            }
+        }        
+    }
+
     function receiveAttack(x, y) {
         if (grid[x][y] === 0 || grid[x][y] === 1) {
             return -1;
         }
-        if (grid[x][y]) {
+        else if (grid[x][y]) {
             grid[x][y].hit();
             grid[x][y] = 1;
             return 1;
@@ -73,6 +100,8 @@ export function createGameboard() {
     return {
         ships,
         placeShip,
+        getShipAt,
+        randomizeShips,
         receiveAttack,
         allShipsSunk,
     }

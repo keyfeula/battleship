@@ -6,10 +6,17 @@
 
 html {
     font-family: system-ui, sans-serif;
+    --bg-color: #333333;
+    --water-color1: #0f2469;
+    --water-color2: #132c7e;
+    --border-color: #000000;
+    --ship-color: #727272;
+    --hit-color: #af1a1a;
 }
 
 body {
     padding: min(1rem, 5%);
+    background-color: var(--bg-color);
 }
 
 header {
@@ -22,7 +29,7 @@ h2 {
 
 main {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     gap: 1rem;
     flex-wrap: wrap;
 }
@@ -39,13 +46,28 @@ main {
     display: grid;
     grid-template-rows: repeat(10, 1fr);
     grid-template-columns: repeat(10, 1fr);
-    border: 1px solid black;
+    border: 2px solid black;
+    background: linear-gradient(to bottom right, var(--water-color1), var(--water-color2), var(--water-color1));
 }
 
-.square {
-    padding: 1rem;
+.grid:hover {
+    cursor: crosshair;
+}
+
+.cell {
     border: 1px solid black;
+    min-width: 2rem;
+    min-height: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: 700;
+}
+
+.cell.ship {
+    background: var(--ship-color);
+}
+
+.ship.hit {
+    background: var(--hit-color);
 }
