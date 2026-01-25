@@ -1,29 +1,36 @@
 import { createPlayer } from "./player.js";
-import { renderGrids } from "./renderGameboard.js";
+import { renderGrid } from "./renderController.js";
 
 const p1 = createPlayer("human");
 const p2 = createPlayer("computer");
 let turnPlayer = p1;
-const mainContainer = document.querySelector("main");
+const p2Grid = document.querySelector(".playerTwo");
 
-renderGrids(p1, p2);
+renderGrid(p1);
+renderGrid(p2);
 
-mainContainer.addEventListener("click", (event) => {
-    const clickedElement = event.target;
-    if (!clickedElement.classList.contains("cell")) {
+function attack(x = Math.floor(Math.random() * 9), y = Math.floor(Math.random() * 9)) {
+    turnPlayer = p2;
+    const response = p1.gameboard.receiveAttack(x, y);
+    if (response === -1) {
+        attack();
+    }
+    else {
+        setTimeout(() => {
+            renderGrid(p1);
+            turnPlayer = p1;
+        }, 1000);
+    }
+}
+
+p2Grid.addEventListener("click", (event) => {
+    if (turnPlayer !== p1) {
         return;
     }
 
-    const coordinates = clickedElement.id.split("-");
-    const attackResponse = turnPlayer.gameboard.receiveAttack(coordinates[0], coordinates[1]);
-    switch(attackResponse) {
-        case -1:
-            break;
-        case 0:
-            clickedElement.textContent = "O";
-            break;
-        case 1:
-            clickedElement.classList.add("hit");
-            break;
-    }
+    const clickedElement = event.target;
+    const [x, y] = clickedElement.id.split("-");
+    p2.gameboard.receiveAttack(x, y);
+    renderGrid(p2);
+    attack();
 });

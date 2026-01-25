@@ -7,16 +7,17 @@
 html {
     font-family: system-ui, sans-serif;
     --bg-color: #333333;
-    --water-color1: #0f2469;
-    --water-color2: #132c7e;
-    --border-color: #000000;
+    --water-color1: #073985;
+    --water-color2: #222285;
     --ship-color: #727272;
-    --hit-color: #af1a1a;
+    --ship-color2: #707070;
+    --hit-color: #990000;
 }
 
 body {
     padding: min(1rem, 5%);
     background-color: var(--bg-color);
+    color: white;
 }
 
 header {
@@ -42,12 +43,10 @@ main {
 }
 
 .grid {
-    max-width: 50rem;
     display: grid;
     grid-template-rows: repeat(10, 1fr);
     grid-template-columns: repeat(10, 1fr);
-    border: 2px solid black;
-    background: linear-gradient(to bottom right, var(--water-color1), var(--water-color2), var(--water-color1));
+    box-shadow: 4px 8px 12px #00000044;
 }
 
 .grid:hover {
@@ -55,19 +54,20 @@ main {
 }
 
 .cell {
-    border: 1px solid black;
-    min-width: 2rem;
-    min-height: 2rem;
+    background: linear-gradient(to bottom right, var(--water-color1), var(--water-color2));
+    min-width: 2.5rem;
+    min-height: 2.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: 700;
+    font-weight: 500;
+    color: white;
 }
 
 .cell.ship {
-    background: var(--ship-color);
+    background: var(--ship-color2);
 }
 
-.ship.hit {
-    background: var(--hit-color);
+.cell.hit {
+    background: radial-gradient(#d89a15, #990000);
 }
