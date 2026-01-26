@@ -59,15 +59,15 @@ export function createGameboard() {
 
     function randomizeShips() {
         for (let ship of ships) {
-            let randomX = Math.floor(Math.random() * 9);
-            let randomY = Math.floor(Math.random() * 9);
+            let randomX = Math.floor(Math.random() * 10);
+            let randomY = Math.floor(Math.random() * 10);
 
             let orientation = Math.random() > 0.5 ? "horizontal" : "vertical";
             let shipPlaced = placeShip(randomX, randomY, ship, orientation);
             while (!shipPlaced) {
                 orientation = Math.random() > 0.5 ? "horizontal" : "vertical";
-                randomX = Math.floor(Math.random() * 9);
-                randomY = Math.floor(Math.random() * 9);
+                randomX = Math.floor(Math.random() * 10);
+                randomY = Math.floor(Math.random() * 10);
                 shipPlaced = placeShip(randomX, randomY, ship, orientation);
             }
         }        

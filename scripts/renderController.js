@@ -1,6 +1,6 @@
 export function renderGrid(player) {
     let gridContainer = "";
-    if (player.type === "computer") {
+    if (player.type === "cpu") {
         gridContainer = document.querySelector(".playerTwo .grid");
     }
     else {

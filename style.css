@@ -24,10 +24,6 @@ header {
     padding-bottom: 1rem;
 }
 
-h2 {
-    margin-bottom: 1rem;
-}
-
 main {
     display: flex;
     justify-content: space-evenly;
@@ -70,4 +66,30 @@ main {
 
 .cell.hit {
     background: radial-gradient(#d89a15, #990000);
+}
+
+dialog {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
+    border: none;
+}
+
+#closeBtn {
+    padding: 0.5rem 1rem;
+    background: var(--ship-color);
+    color: white;
+    border-radius: 5px;
+}
+
+dialog .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+dialog::backdrop {
+    background-color: #00000077;
 }
