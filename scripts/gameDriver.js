@@ -1,16 +1,16 @@
 import { createPlayer } from "./player.js";
 import { renderGrid } from "./renderController.js";
 
-const p1 = createPlayer("human");
-const p2 = createPlayer("cpu");
-let turnPlayer = p1;
-
 const p2Grid = document.querySelector(".playerTwo");
 const gameStartDialog = document.querySelector("#gameStart");
 const gameOverDialog = document.querySelector("#gameOver");
 const gameOverTitle = document.querySelector("#gameOver h2");
 const closeBtn = document.querySelector("#closeBtn");
 const startBtn = document.querySelector("#startBtn");
+
+let p1 = createPlayer("human");
+let p2 = createPlayer("cpu");
+let turnPlayer = p1;
 
 renderGrid(p1);
 renderGrid(p2);
@@ -23,16 +23,16 @@ p2Grid.addEventListener("click", (event) => {
     }
 });
 
-closeBtn.addEventListener("click", () => {
-    gameOverDialog.close();
-});
+ closeBtn.addEventListener("click", () => {
+     gameOverDialog.close();
+ });
 
 startBtn.addEventListener("click", () => {
     gameStartDialog.close();
 });
 
 window.onload = () => {
-    gameStartDialog.show();
+    gameStartDialog.showModal();
 };
 
 function attack(x = Math.floor(Math.random() * 10), y = Math.floor(Math.random() * 10)) {
@@ -50,6 +50,7 @@ function attack(x = Math.floor(Math.random() * 10), y = Math.floor(Math.random()
             gameOverTitle.textContent = `${turnPlayer === p1 ? "Player One Wins!" : "Player Two Wins!"}`;
             gameOverDialog.showModal();
             renderGrid(opponent);
+            newGame();
         }
         else if (turnPlayer.type === "cpu") {
             setTimeout(() => {
@@ -66,4 +67,12 @@ function attack(x = Math.floor(Math.random() * 10), y = Math.floor(Math.random()
             attack();
         }
     }
+}
+
+function newGame() {
+    p1 = createPlayer("human");
+    p2 = createPlayer("cpu");
+    turnPlayer = p1;
+    renderGrid(p1);
+    renderGrid(p2);
 }
