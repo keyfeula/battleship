@@ -6,9 +6,11 @@ const p2 = createPlayer("cpu");
 let turnPlayer = p1;
 
 const p2Grid = document.querySelector(".playerTwo");
-const gameOverDialog = document.querySelector("dialog");
+const gameStartDialog = document.querySelector("#gameStart");
+const gameOverDialog = document.querySelector("#gameOver");
 const gameOverTitle = document.querySelector("#gameOver h2");
 const closeBtn = document.querySelector("#closeBtn");
+const startBtn = document.querySelector("#startBtn");
 
 renderGrid(p1);
 renderGrid(p2);
@@ -25,6 +27,14 @@ closeBtn.addEventListener("click", () => {
     gameOverDialog.close();
 });
 
+startBtn.addEventListener("click", () => {
+    gameStartDialog.close();
+});
+
+window.onload = () => {
+    gameStartDialog.show();
+};
+
 function attack(x = Math.floor(Math.random() * 10), y = Math.floor(Math.random() * 10)) {
     const opponent = turnPlayer === p1 ? p2 : p1;
     const response = opponent.gameboard.receiveAttack(x, y);
@@ -39,9 +49,9 @@ function attack(x = Math.floor(Math.random() * 10), y = Math.floor(Math.random()
         if (opponent.gameboard.allShipsSunk()) {
             gameOverTitle.textContent = `${turnPlayer === p1 ? "Player One Wins!" : "Player Two Wins!"}`;
             gameOverDialog.showModal();
+            renderGrid(opponent);
         }
-
-        if (turnPlayer.type === "cpu") {
+        else if (turnPlayer.type === "cpu") {
             setTimeout(() => {
             renderGrid(opponent);
             turnPlayer = turnPlayer === p1 ? p2 : p1;
@@ -50,6 +60,9 @@ function attack(x = Math.floor(Math.random() * 10), y = Math.floor(Math.random()
         else {
             renderGrid(opponent);
             turnPlayer = turnPlayer === p1 ? p2 : p1;
+            setTimeout(() => {
+                window.scrollTo(0, 0);
+            }, 300);
             attack();
         }
     }
