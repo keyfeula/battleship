@@ -7,6 +7,7 @@ const gameOverDialog = document.querySelector("#gameOver");
 const gameOverTitle = document.querySelector("#gameOver h2");
 const closeBtn = document.querySelector("#closeBtn");
 const startBtn = document.querySelector("#startBtn");
+const randomBtn = document.querySelector("#randomBtn");
 
 let p1 = createPlayer("human");
 let p2 = createPlayer("cpu");
@@ -29,6 +30,10 @@ p2Grid.addEventListener("click", (event) => {
 
 startBtn.addEventListener("click", () => {
     gameStartDialog.close();
+});
+
+randomBtn.addEventListener("click", () => {
+    newGame();
 });
 
 window.onload = () => {

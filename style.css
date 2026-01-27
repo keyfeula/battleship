@@ -11,7 +11,7 @@ html {
     --water-color1: #073985;
     --water-color2: #222285;
     --ship-color: #727272;
-    --ship-color2: #707070;
+    --ship-color2: #555555;
     --hit-color: #990000;
 }
 
@@ -22,6 +22,10 @@ body {
 
 header {
     padding: 1rem;
+}
+
+h1 {
+    margin-bottom: 1rem;
 }
 
 main {
@@ -64,7 +68,7 @@ main {
 }
 
 .cell.ship {
-    background: var(--ship-color2);
+    background: linear-gradient(to top right, var(--ship-color), var(--ship-color2));
 }
 
 .cell.hit {
@@ -85,6 +89,9 @@ button {
     background: var(--ship-color);
     color: white;
     border-radius: 5px;
+    border: none;
+    font-family: inherit;
+    box-shadow: 2px 4px 5px #00000044;
 }
 
 dialog .content {
